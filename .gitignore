@@ -1,2 +1,3 @@
 /pkg/
-/env_for_bot
+/env_for_bot/
+report.log
