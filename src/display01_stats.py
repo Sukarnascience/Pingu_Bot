@@ -5,8 +5,11 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 import subprocess
+import requests
 
-cycle = 0
+url = 'http://192.168.43.10:5000/isAvailable' # Server IP
+cycle = 120
+temp = ""
 RST = None
 
 disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
@@ -55,8 +58,30 @@ while True:
     elapsed_time = time.time() - start_time
     formatted_time = time.strftime('%H:%M:%S', time.gmtime(elapsed_time))
     raspi_temp = get_raspberry_pi_temp()
-
-    draw.text((0, 0),f"Pingu Bot | Cloud down" ,  font=font, fill=255)
+    if(cycle==120):
+        try:
+            response = requests.get(url)
+            data = response.json()
+            if data['status'] == 'up':
+                #print('cloud up')
+                temp = "Cloud Live"
+                #draw.text((0, 0),f"Pingu Bot | Cloud live" ,  font=font, fill=255)
+            else:
+                temp = "Cloud Down"
+                #draw.text((0, 0),f"Pingu Bot | Cloud down" ,  font=font, fill=255)
+                #print('cloud down')
+        except requests.ConnectionError:
+            temp = "Cloud Down"
+            #draw.text((0, 0),f"Pingu Bot | Cloud down" ,  font=font, fill=255)
+            #print('cloud down')
+        except Exception as e:
+            temp = "Cloud ERROR"
+            #draw.text((0, 0),f"Pingu Bot | Cloud ERROR" ,  font=font, fill=255)
+            #print(f'An error occurred: {e}')
+       #draw.text((0, 0),f"Pingu Bot | Cloud down" ,  font=font, fill=255)
+        cycle=0
+    cycle+=1
+    draw.text((0, 0),f"Pingu Bot | " + temp ,  font=font, fill=255)
     draw.text((0, 14),"IP                  : " + IP_str,  font=font, fill=255)
     draw.text((0, 23),"Temp        : " + str(raspi_temp) + f"°C", font=font, fill=255)
     draw.text((0, 32),"UP Time  : " + formatted_time, font=font, fill=255)
