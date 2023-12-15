@@ -13,6 +13,6 @@ echo "Activated virtual environment" >> report.log
 
 cd src
 echo "Python script starts executing" >> report.log
-python3 display01_stats.py
+python3 run_multiple_files.py
 echo "Python script executed" >> report.log
 
