@@ -126,3 +126,12 @@ Got it. Let's modify the service file accordingly:
     ```
 
 Now, your `start_bot.sh` script should run automatically on boot. Remember to replace `your_username` with your actual username.
+
+
+REBOOT 
+```sudo apt install libraspberrypi-dev libffi-dev```
+https://circuitdigest.com/microcontroller-projects/how-to-install-python-opencv-on-raspberry-pi#comment-31289
+```sudo apt-get install libopencv-dev python3-opencv```
+
+1. PORT:5001 for Camera
+2. PORT:5002 for Head + RGB Status LED (Pingu)
