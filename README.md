@@ -132,6 +132,10 @@ REBOOT
 ```sudo apt install libraspberrypi-dev libffi-dev```
 https://circuitdigest.com/microcontroller-projects/how-to-install-python-opencv-on-raspberry-pi#comment-31289
 ```sudo apt-get install libopencv-dev python3-opencv```
+```sudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng-dev libwebp-dev libopenexr-dev
+sudo apt-get install libhdf5-dev libhdf5-103
+sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libatlas-base-dev gfortran
+```
 
 1. PORT:5001 for Camera
-2. PORT:5002 for Head + RGB Status LED (Pingu)
+2. PORT:5500 for Head + RGB Status LED (Pingu)

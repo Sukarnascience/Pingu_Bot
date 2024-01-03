@@ -8,7 +8,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 # Create a VideoCapture object for the camera (change the index if needed)
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 # Route for the main page
 @app.route('/')
@@ -51,7 +51,7 @@ def take_snap():
 
 # Run the Flask application
 if __name__ == '__main__':
-    app.run(debug=True, port=5001, host='0.0.0.0')
+    app.run(port=5001, host='0.0.0.0')
 
 # Release the camera and close the application when finished
 cap.release()

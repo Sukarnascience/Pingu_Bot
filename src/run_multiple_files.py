@@ -1,20 +1,30 @@
+import os
 import subprocess
 
-def run_file(file_name):
-    subprocess.run(['python', file_name])
+def run_file(file_path):
+    subprocess.run(['python', file_path])
+
+def run_file_onSUDO(file_path):
+    subprocess.run(['sudo','python', file_path])
 
 if __name__ == "__main__":
-    # List of Python files to run
-    files_to_run = ['display01_stats.py', 'statusLed.py']  # Add your file names
+    # Get the path of the current script
+    script_path = os.path.abspath(__file__)
+    script_directory = os.path.dirname(script_path)
 
-    # Run each file in parallel
-    processes = []
+    # Navigate to the ipCam_webserver folder
+    app_folder_path = os.path.join(script_directory, 'ipCam_webserver')
+
+    # List of Python files to run in the current folder
+    files_to_run = ['display01_stats.py']  # Add your file names
+
+    # Run each file in parallel (from the current folder)
     for file_name in files_to_run:
-        process = subprocess.Popen(['python', file_name])
-        processes.append(process)
+        file_path = os.path.join(script_directory, file_name)
+        run_file(file_path)
 
-    # Wait for all processes to finish
-    for process in processes:
-        process.wait()
+    # Run the app.py file (from the ipCam_webserver folder)
+    app_file_path = os.path.join(app_folder_path, 'app.py')
+    run_file_onSUDO(app_file_path)
 
     print("All files have been executed.")

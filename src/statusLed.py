@@ -69,7 +69,7 @@ def send_command_to_arduino(command):
 
 if __name__ == '__main__':
     try:
-        app.run(debug=True, port=5002, host='0.0.0.0')
+        app.run(port=5500, host='0.0.0.0')
     finally:
         # Cleanup GPIO on exit
         GPIO.cleanup()
